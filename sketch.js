@@ -7,20 +7,23 @@ var engine, world;
 var canvas;
 var palyer, playerBase;
 var computer, computerBase;
-
+var compArrow;
+var computerArcher
 var arrow;
 
 
+
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth,windowHeight);
 
   engine = Engine.create();
   world = engine.world;
 
   playerBase = new PlayerBase(300, random(450, height - 300), 180, 150);
   player = new Player(285, playerBase.body.position.y - 153, 50, 180);
- 
+  playerArcher = new PlayerArcher(345, player.body.position.y - 25, 120, 120);
   //Create Player Archer Object
+  
 
   computerBase = new ComputerBase(
     width - 300,
@@ -39,10 +42,9 @@ function setup() {
     computerBase.body.position.y - 180,
     120,
     120
-  );
-  
-  //Create an arrow Object
-  
+  ); 
+
+ //Create an arrow Object
   
 }
 
@@ -67,17 +69,8 @@ function draw() {
   
   playerArcher.display();
   computerArcher.display()
+//compArrow.display();
 
-
-  //Display arrow();
-  
-  //if Space (32) key is pressed call shoot function of playerArrow
-  if(keyCode === 32){
-    //Call shoot() function and pass angle of playerArcher
-
-
-  }
+  //Playerarrow.display();
+ 
 }
-
-
-
