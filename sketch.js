@@ -11,6 +11,8 @@ var compArrow;
 var computerArcher
 var arrow;
 
+var plArrows = [];
+var CmpArrows = [];
 
 
 function setup() {
@@ -59,7 +61,6 @@ function draw() {
   textSize(40);
   text("EPIC ARCHERY", width / 2, 100);
 
- 
   playerBase.display();
   player.display();
   
@@ -69,8 +70,48 @@ function draw() {
   
   playerArcher.display();
   computerArcher.display()
-//compArrow.display();
-
-  //Playerarrow.display();
+  
+//Playerarrow.display();
  
 }
+function keyPressed() {
+
+  if(keyCode === 32){
+    // create an arrow object and add into an array ; set its angle same as angle of playerArcher
+    var posX = computerArcher.body.position.x;
+    var posY = computerArcher.body.position.y;
+    var angle = computerArcher.body.angle+PI/2;
+
+    arrow.display()
+
+    var arrow = new Computerarrow(width - 340,player.body.position.y - 5,80,20)
+    Matter.Body.setAngle(arrow.body, angle);
+    CmpArrows.push(arrow);
+  
+  }
+}
+
+function keyReleased () {
+
+  if(keyCode === 32){
+    //call shoot() function for each arrow in an array playerArrows
+    if (playerArrow.length) {
+      var angle = computerArcher.body.angle+PI/2;
+      CmpArrows[playerArrows.length - 1].shoot(angle);
+    }
+  }
+
+
+}
+
+function showArrows(index, arrows) {
+  arrows[index].display();
+  
+    
+  
+ 
+
+}
+
+
+

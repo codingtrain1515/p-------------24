@@ -1,41 +1,39 @@
 class ComputerArcher {
-    constructor(x, y, width, height,archerangle) {
-      var options = {
-        restitution: 0.8,
-        friction: 1.0,
-        density: 1.0,
-        isStatic: false
+  constructor(x, y, width, height,angle) {
+    const options = {
+      isStatic: true
+    };
 
-      };
-      this.width = width;
-      this.height = height;
-      this.body = Bodies.rectangle(x, y, this.width, this.height,archerangle, options);
-      this.image = loadImage("./assets/computerArcher.png");
-      World.add(world, this.body);
-    }
-   display() {
+    this.body = Matter.Bodies.rectangle(x, y, width, height, options);
+    this.width = width;
+    this.height = height;
+    //this.collapse = false;
+    this.image = loadImage("./assets/computerArcher.png");
 
-    if(keyIsDown(RIGHT_ARROW)) {
-      this.angle = 0.1;
+    World.add(world, this.body);
 
-    }
-
-    
-    if(keyIsDown(LEFT_ARROW)) {
-      this.angle = -0.2;
-    }
-
-
-  
-    var pos = this.body.position;
-      var angle = this.body.angle;
-  
-      push();
-      translate(pos.x, pos.y);
-      rotate(angle);
-      imageMode(CENTER);
-      image(this.image, 0, 0, this.width, this.height);
-      pop();
-    }
+    Matter.Body.setAngle(this.body, -PI / 2); // -90 degree
   }
-  
+
+  display() {
+    var pos = this.body.position;
+    var angle = this.body.angle;
+    
+    if (keyIsDown(DOWN_ARROW) && angle < -1.2) {
+      angle += 0.01;
+      Matter.Body.setAngle(this.body, angle);
+    }
+
+    if (keyIsDown(UP_ARROW) && angle > -1.9) {
+      angle -= 0.01;
+      Matter.Body.setAngle(this.body, angle);
+    }
+    
+    push();
+    translate(pos.x, pos.y);
+    rotate(angle);
+    imageMode(CENTER);
+    image(this.image, 0, 0, this.width, this.height);
+    pop();
+  }
+}
