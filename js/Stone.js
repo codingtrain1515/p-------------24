@@ -3,21 +3,32 @@ class Stone{
 
         let options={
             isStatic: false,
-            friction:0.1,
-            density:1 
+            restitution:0.8
         }
         this.stone = Bodies.circle(x,y,r,options)
         this.x=x
         this.y=y
-    this.r =r
+        this.r =r
+        
         World.add(world,this.stone)
     }
+    
+  
 
     display(){
+
+        for(var i = 0;i<= 8;i++){
+            var x= random(width/2 -200,width/2 +300);
+           var y = random(-10,140);
+         var  stone = new Stone(x,y,80);      
+           stones.push(stone);
+        } 
+
         push()
         var pos = this.stone.position
         ellipse(pos.x,pos.y,this.r);
         pop()
+
     }
 
 }

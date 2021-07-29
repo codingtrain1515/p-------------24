@@ -1,5 +1,5 @@
 class Base{
-    constructor(x,y,w,h) {
+    constructor(x,y,w,h,) {
 
         let options ={
             isStatic:true,
